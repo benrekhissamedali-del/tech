@@ -3,10 +3,12 @@ package com.infosphere.app
 import android.Manifest
 import android.app.Activity
 import android.content.pm.PackageManager
+import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import java.util.Locale
 
@@ -14,7 +16,9 @@ class MainActivity : Activity() {
 
     private lateinit var sky: SkyView
     private lateinit var engine: SignalEngine
+    private var sound: SoundEngine? = null
     private var started = false
+    private var latestSources: List<SignalSource> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,9 +34,12 @@ class MainActivity : Activity() {
         val infoTitle = findViewById<TextView>(R.id.infoTitle)
         val infoDetail = findViewById<TextView>(R.id.infoDetail)
         val hint = findViewById<TextView>(R.id.hint)
+        val listPanel = findViewById<View>(R.id.listPanel)
+        val btnMute = findViewById<TextView>(R.id.btnMute)
 
         engine = SignalEngine(this) { sources ->
             runOnUiThread {
+                latestSources = sources
                 sky.setSources(sources)
                 countCell.text = getString(
                     R.string.count_cell, sources.count { it.type == SignalType.CELL })
@@ -57,12 +64,29 @@ class MainActivity : Activity() {
                 infoCard.visibility = View.GONE
             } else {
                 infoTitle.text = src.title
+                infoTitle.setTextColor(frequencyColor(src.frequencyMhz, src.type))
                 infoDetail.text = src.detail
                 infoCard.visibility = View.VISIBLE
             }
         }
+        sky.onPulseArrived = { src -> sound?.ping(src.frequencyMhz) }
+
         findViewById<View>(R.id.infoClose).setOnClickListener {
             infoCard.visibility = View.GONE
+        }
+
+        findViewById<View>(R.id.btnList).setOnClickListener {
+            buildListPanel()
+            listPanel.visibility = View.VISIBLE
+        }
+        findViewById<View>(R.id.listClose).setOnClickListener {
+            listPanel.visibility = View.GONE
+        }
+
+        btnMute.setOnClickListener {
+            val s = sound ?: return@setOnClickListener
+            s.muted = !s.muted
+            btnMute.text = getString(if (s.muted) R.string.sound_off else R.string.sound_on)
         }
 
         findViewById<Button>(R.id.startBtn).setOnClickListener {
@@ -74,6 +98,73 @@ class MainActivity : Activity() {
         }
         hint.postDelayed({ hint.animate().alpha(0f).setDuration(1200).start() }, 9000)
     }
+
+    // -------------------------------------------------------- Liste détaillée
+
+    private fun buildListPanel() {
+        val content = findViewById<LinearLayout>(R.id.listContent)
+        content.removeAllViews()
+        val density = resources.displayMetrics.density
+
+        fun addHeader(text: String) {
+            val tv = TextView(this)
+            tv.text = text
+            tv.setTextColor(getColor(R.color.accent))
+            tv.textSize = 15f
+            tv.typeface = Typeface.DEFAULT_BOLD
+            tv.setPadding(0, (18 * density).toInt(), 0, (6 * density).toInt())
+            content.addView(tv)
+        }
+
+        fun addRow(src: SignalSource) {
+            val row = LinearLayout(this)
+            row.orientation = LinearLayout.VERTICAL
+            row.setBackgroundResource(R.drawable.info_card_bg)
+            row.setPadding(
+                (14 * density).toInt(), (10 * density).toInt(),
+                (14 * density).toInt(), (10 * density).toInt(),
+            )
+            val lp = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+            )
+            lp.bottomMargin = (8 * density).toInt()
+            row.layoutParams = lp
+
+            val title = TextView(this)
+            title.text = src.title
+            title.setTextColor(frequencyColor(src.frequencyMhz, src.type))
+            title.textSize = 15f
+            title.typeface = Typeface.DEFAULT_BOLD
+            row.addView(title)
+
+            val detail = TextView(this)
+            detail.text = src.detail
+            detail.setTextColor(getColor(R.color.ink))
+            detail.alpha = 0.8f
+            detail.textSize = 13f
+            detail.setLineSpacing(0f, 1.25f)
+            row.addView(detail)
+
+            content.addView(row)
+        }
+
+        val cells = latestSources.filter { it.type == SignalType.CELL }
+            .sortedByDescending { it.strength }
+        val wifis = latestSources.filter { it.type == SignalType.WIFI }
+            .sortedByDescending { it.strength }
+        val sats = latestSources.filter { it.type == SignalType.SAT }
+            .sortedByDescending { it.strength }
+
+        addHeader(getString(R.string.header_cell, cells.size))
+        cells.forEach(::addRow)
+        addHeader(getString(R.string.header_wifi, wifis.size))
+        wifis.forEach(::addRow)
+        addHeader(getString(R.string.header_sat, sats.size))
+        sats.forEach(::addRow)
+    }
+
+    // ------------------------------------------------------------ Permissions
 
     private fun requiredPermissions(): Array<String> {
         val perms = mutableListOf(
@@ -97,10 +188,13 @@ class MainActivity : Activity() {
         if (requestCode == PERMISSION_REQUEST) startExperience()
     }
 
+    // ----------------------------------------------------------- Cycle de vie
+
     private fun startExperience() {
         if (started) return
         started = true
         findViewById<View>(R.id.splash).visibility = View.GONE
+        if (sound == null) sound = SoundEngine(this)
         engine.start()
         sky.start()
     }
@@ -110,6 +204,7 @@ class MainActivity : Activity() {
         if (started) {
             engine.start()
             sky.start()
+            sound?.resume()
         }
     }
 
@@ -118,7 +213,14 @@ class MainActivity : Activity() {
         if (started) {
             sky.stop()
             engine.stop()
+            sound?.pause()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        sound?.release()
+        sound = null
     }
 
     private companion object {

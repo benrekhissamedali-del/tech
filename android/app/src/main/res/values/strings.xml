@@ -11,6 +11,13 @@
     <string name="count_wifi">%d Wi-Fi</string>
     <string name="count_sat">%d satellites</string>
     <string name="compass_fmt">%1$d° %2$s</string>
+    <string name="btn_list">☰ Liste</string>
+    <string name="sound_on">🔊 Son</string>
+    <string name="sound_off">🔇 Muet</string>
+    <string name="list_title">Signaux détectés</string>
+    <string name="header_cell">Antennes cellulaires (%d)</string>
+    <string name="header_wifi">Réseaux Wi-Fi (%d)</string>
+    <string name="header_sat">Satellites GNSS (%d)</string>
 
     <string-array name="compass_dirs">
         <item>N</item>

@@ -33,6 +33,7 @@ class SkyView @JvmOverloads constructor(
 
     var onCompass: ((Int) -> Unit)? = null
     var onTap: ((SignalSource?) -> Unit)? = null
+    var onPulseArrived: ((SignalSource) -> Unit)? = null
 
     private var sources: List<SignalSource> = emptyList()
 
@@ -194,16 +195,19 @@ class SkyView @JvmOverloads constructor(
     private val shardPath = Path()
     private val proj = FloatArray(3)
 
-    private fun colorFor(type: SignalType): Int = when (type) {
-        SignalType.CELL -> Color.rgb(255, 138, 92)
-        SignalType.WIFI -> Color.rgb(126, 232, 162)
-        SignalType.SAT -> Color.rgb(245, 215, 110)
-    }
-
-    private fun sizeFor(type: SignalType): Float = when (type) {
-        SignalType.CELL -> 5f
-        SignalType.WIFI -> 3.5f
-        SignalType.SAT -> 4f
+    /**
+     * Taille selon la fréquence : proportionnelle à la longueur d'onde,
+     * donc les basses fréquences (grandes ondes : 4G 800 MHz) sont plus
+     * grosses que le Wi-Fi 5 GHz (ondes courtes).
+     */
+    private fun sizeFor(src: SignalSource): Float {
+        if (src.frequencyMhz <= 0f) return when (src.type) {
+            SignalType.CELL -> 5f
+            SignalType.WIFI -> 3.5f
+            SignalType.SAT -> 4f
+        }
+        val wavelengthCm = 30_000f / src.frequencyMhz
+        return (2.5f + wavelengthCm * 0.12f).coerceIn(2.5f, 8f)
     }
 
     /**
@@ -270,18 +274,25 @@ class SkyView @JvmOverloads constructor(
             projectedDepth[s] = proj[2]
 
             val src = sources[s]
-            val color = colorFor(src.type)
+            val color = frequencyColor(src.frequencyMhz, src.type)
             val scale = 40f / proj[2] * density
-            val pulse = 0.6f + 0.4f * sin(time * 2f + src.azimuthDeg)
+            val size = sizeFor(src)
+            // Le halo bat d'autant plus vite que la fréquence radio est élevée.
+            val rate = 1.2f + frequencyNorm(src.frequencyMhz) * 2.8f
+            val pulse = 0.6f + 0.4f * sin(time * rate + src.azimuthDeg)
 
             haloPaint.color = color
-            haloPaint.alpha = 34
+            haloPaint.alpha = 38
             canvas.drawCircle(
-                proj[0], proj[1], sizeFor(src.type) * (1.6f + pulse) * scale, haloPaint
+                proj[0], proj[1], size * (1.6f + pulse) * scale, haloPaint
+            )
+            haloPaint.alpha = 22
+            canvas.drawCircle(
+                proj[0], proj[1], size * (2.6f + pulse * 1.4f) * scale, haloPaint
             )
             nodePaint.color = color
             canvas.drawCircle(
-                proj[0], proj[1], max(1.5f, sizeFor(src.type) * scale), nodePaint
+                proj[0], proj[1], max(1.5f, size * scale), nodePaint
             )
         }
 
@@ -300,6 +311,9 @@ class SkyView @JvmOverloads constructor(
             val pu = pulses[p]
             pu.t += dt * pu.speed
             if (pu.t >= 1f || pu.srcIndex >= sources.size) {
+                if (pu.t >= 1f && pu.srcIndex < sources.size) {
+                    onPulseArrived?.invoke(sources[pu.srcIndex])
+                }
                 pulses.removeAt(p); p--; continue
             }
             val k = pu.t
