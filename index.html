@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#10106b">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Infosphère — Visualisation des signaux</title>
+  <meta name="description" content="Une visualisation 360° en temps réel du monde invisible des signaux numériques : antennes cellulaires, satellites GPS et routeurs Wi-Fi autour de vous.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Écran d'accueil -->
+  <div id="splash">
+    <canvas id="splash-canvas"></canvas>
+    <div class="splash-content">
+      <h1>Infosphère</h1>
+      <p class="subtitle">Une visualisation en temps réel<br>du monde invisible des signaux</p>
+      <p id="splash-status">initialisation…</p>
+      <button id="start-btn" hidden>Explorer</button>
+    </div>
+  </div>
+
+  <!-- Vue principale -->
+  <main id="app" hidden>
+    <canvas id="scene"></canvas>
+
+    <header id="hud">
+      <div id="hud-counts">
+        <span class="hud-item"><i class="dot dot-cell"></i><span id="count-cell">0</span> antennes</span>
+        <span class="hud-item"><i class="dot dot-wifi"></i><span id="count-wifi">0</span> Wi-Fi</span>
+        <span class="hud-item"><i class="dot dot-sat"></i><span id="count-sat">0</span> satellites</span>
+      </div>
+      <div id="hud-coords">—</div>
+    </header>
+
+    <div id="compass"><span id="compass-deg">0°</span><span id="compass-dir">N</span></div>
+
+    <!-- Fiche d'information d'un signal -->
+    <div id="info-card" hidden>
+      <button id="info-close" aria-label="Fermer">×</button>
+      <h2 id="info-title">—</h2>
+      <p id="info-detail">—</p>
+    </div>
+
+    <footer id="hint">Tournez sur vous-même pour explorer · touchez un signal pour les détails</footer>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

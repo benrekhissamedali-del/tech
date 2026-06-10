@@ -1,0 +1,13 @@
+{
+  "name": "Infosphère — Visualisation des signaux",
+  "short_name": "Infosphère",
+  "description": "Une visualisation 360° en temps réel du monde invisible des signaux numériques autour de vous.",
+  "start_url": ".",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#10106b",
+  "theme_color": "#10106b",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
