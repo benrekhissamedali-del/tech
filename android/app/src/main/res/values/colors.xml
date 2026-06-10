@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg">#10106B</color>
+    <color name="bg_deep">#0A0A4A</color>
+    <color name="ink">#FFFFFF</color>
+    <color name="accent">#4FC3D9</color>
+    <color name="cell">#FF8A5C</color>
+    <color name="wifi">#7EE8A2</color>
+    <color name="sat">#F5D76E</color>
+</resources>

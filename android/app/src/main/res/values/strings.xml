@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Infosphère</string>
+    <string name="splash_subtitle">Une visualisation en temps réel\ndu monde invisible des signaux</string>
+    <string name="splash_explain">L\'application a besoin de votre position pour scanner les réseaux Wi-Fi, les antennes cellulaires et les satellites GPS réellement autour de vous.</string>
+    <string name="explore">Explorer</string>
+    <string name="hint">Tournez sur vous-même pour explorer · touchez un signal pour les détails</string>
+    <string name="coords_unknown">position inconnue</string>
+    <string name="close">×</string>
+    <string name="count_cell">%d antennes</string>
+    <string name="count_wifi">%d Wi-Fi</string>
+    <string name="count_sat">%d satellites</string>
+    <string name="compass_fmt">%1$d° %2$s</string>
+
+    <string-array name="compass_dirs">
+        <item>N</item>
+        <item>NE</item>
+        <item>E</item>
+        <item>SE</item>
+        <item>S</item>
+        <item>SO</item>
+        <item>O</item>
+        <item>NO</item>
+    </string-array>
+</resources>

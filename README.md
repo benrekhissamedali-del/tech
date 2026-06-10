@@ -24,7 +24,30 @@ vivre votre vie numérique.
 - **PWA** : installable sur l'écran d'accueil, fonctionne hors connexion
 - Aucune dépendance — HTML, CSS et JavaScript purs
 
-## Lancer l'application
+## Application Android native
+
+Le dossier [`android/`](android/) contient une **application Android native en
+Kotlin** qui, contrairement à la version web, affiche de **vraies données** :
+
+- **Scan Wi-Fi réel** (`WifiManager`) : SSID, bande, puissance du signal et
+  distance estimée de chaque routeur autour de vous
+- **Vraies antennes cellulaires** (`TelephonyManager`) : technologie
+  (2G/3G/4G/5G), opérateur, puissance, antenne de rattachement
+- **Vrais satellites GNSS** (`GnssStatus`) : GPS, Galileo, GLONASS, BeiDou…
+  avec leur **position exacte dans le ciel** (azimut/élévation réels)
+- Vue 360° pilotée par le capteur de rotation (gyroscope + boussole)
+
+### Obtenir l'APK
+
+À chaque push, GitHub Actions compile l'APK automatiquement :
+onglet **Actions** du dépôt → workflow « Build Android APK » → dernier run →
+artefact **infosphere-debug-apk**. Téléchargez-le sur votre téléphone et
+installez-le (autorisez les sources inconnues).
+
+Pour compiler localement : ouvrez `android/` dans Android Studio, ou
+`cd android && gradle assembleDebug`.
+
+## Version web — lancer l'application
 
 Servez le dossier en HTTPS (requis pour la géolocalisation et les capteurs) :
 
