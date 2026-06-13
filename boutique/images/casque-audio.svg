@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <defs>
+    <linearGradient id="bg-casque-audio" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#272f5e"/>
+      <stop offset="1" stop-color="#171c38"/>
+    </linearGradient>
+    <radialGradient id="glow-casque-audio" cx="0.5" cy="0.42" r="0.55">
+      <stop offset="0" stop-color="#5b8cff" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#5b8cff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="scr-casque-audio" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5b8cff"/>
+      <stop offset="1" stop-color="#38e1b0"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" rx="28" fill="url(#bg-casque-audio)"/>
+  <rect width="800" height="600" rx="28" fill="url(#glow-casque-audio)"/>
+  <g stroke-linejoin="round" stroke-linecap="round">
+
+    <ellipse cx="400" cy="500" rx="150" ry="22" fill="#000" opacity="0.22"/>
+    <path d="M250 360 v-40 a150 150 0 0 1 300 0 v40" fill="none" stroke="#c7cee6" stroke-width="26"/>
+    <rect x="214" y="346" width="86" height="150" rx="30" fill="#1c2244"/>
+    <rect x="232" y="366" width="50" height="110" rx="22" fill="#5b8cff"/>
+    <rect x="500" y="346" width="86" height="150" rx="30" fill="#1c2244"/>
+    <rect x="518" y="366" width="50" height="110" rx="22" fill="#5b8cff"/>
+
+  </g>
+</svg>

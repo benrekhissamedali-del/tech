@@ -70,7 +70,7 @@ function carteHTML(p) {
 
   return `
     <article class="carte">
-      <a class="carte-img" href="produit.html?id=${p.id}" aria-label="${p.nom}">${p.icone}</a>
+      <a class="carte-img" href="produit.html?id=${p.id}" aria-label="${p.nom}"><img src="${p.image}" alt="${p.nom}" loading="lazy"></a>
       <div class="carte-corps">
         <span class="carte-cat">${p.categorie}</span>
         <a href="produit.html?id=${p.id}"><h3 class="carte-nom">${p.nom}</h3></a>

@@ -31,7 +31,7 @@ if (!produit) {
     </nav>
 
     <div class="produit-detail">
-      <div class="produit-visuel">${produit.icone}</div>
+      <div class="produit-visuel"><img src="${produit.image}" alt="${produit.nom}"></div>
       <div class="produit-info">
         <span class="carte-cat">${produit.categorie}</span>
         <h1>${produit.nom}</h1>

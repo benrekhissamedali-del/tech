@@ -184,6 +184,10 @@ const PRODUITS = [
   },
 ];
 
+// Chaque produit possède une illustration SVG dans images/<id>.svg
+// (générée par build-images.js). L'emoji sert de repli/accessibilité.
+PRODUITS.forEach((p) => { p.image = `images/${p.id}.svg`; });
+
 const CATEGORIES = [...new Set(PRODUITS.map((p) => p.categorie))].sort();
 
 function trouverProduit(id) {

@@ -34,7 +34,7 @@ function rendreRecap() {
     <div class="recap" style="margin:0 0 26px;max-width:none">
       ${lignes.map((l) => `
         <div class="recap-ligne">
-          <span>${l.produit.icone} ${l.produit.nom} × ${l.q}</span>
+          <span><img class="mini" src="${l.produit.image}" alt=""> ${l.produit.nom} × ${l.q}</span>
           <span>${formatPrix(l.produit.prix * l.q)}</span>
         </div>`).join("")}
       <div class="recap-ligne"><span>Livraison</span><span>${port === 0 ? "Offerts" : formatPrix(port)}</span></div>

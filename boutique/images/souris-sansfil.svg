@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <defs>
+    <linearGradient id="bg-souris-sansfil" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#272f5e"/>
+      <stop offset="1" stop-color="#171c38"/>
+    </linearGradient>
+    <radialGradient id="glow-souris-sansfil" cx="0.5" cy="0.42" r="0.55">
+      <stop offset="0" stop-color="#38e1b0" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#38e1b0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="scr-souris-sansfil" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5b8cff"/>
+      <stop offset="1" stop-color="#38e1b0"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" rx="28" fill="url(#bg-souris-sansfil)"/>
+  <rect width="800" height="600" rx="28" fill="url(#glow-souris-sansfil)"/>
+  <g stroke-linejoin="round" stroke-linecap="round">
+
+    <ellipse cx="400" cy="500" rx="130" ry="20" fill="#000" opacity="0.22"/>
+    <path d="M400 160 c70 0 110 60 110 150 c0 90 -40 150 -110 150 s-110 -60 -110 -150 c0 -90 40 -150 110 -150 z" fill="#c7cee6"/>
+    <path d="M400 160 c-70 0 -110 60 -110 150 h110 z" fill="#eef1ff"/>
+    <rect x="392" y="196" width="16" height="54" rx="8" fill="#1c2244"/>
+    <circle cx="400" cy="234" r="9" fill="#38e1b0"/>
+    <line x1="400" y1="160" x2="400" y2="196" stroke="#9aa3c7" stroke-width="3"/>
+
+  </g>
+</svg>

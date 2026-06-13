@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <defs>
+    <linearGradient id="bg-cle-usb-128" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#272f5e"/>
+      <stop offset="1" stop-color="#171c38"/>
+    </linearGradient>
+    <radialGradient id="glow-cle-usb-128" cx="0.5" cy="0.42" r="0.55">
+      <stop offset="0" stop-color="#38e1b0" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#38e1b0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="scr-cle-usb-128" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5b8cff"/>
+      <stop offset="1" stop-color="#38e1b0"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" rx="28" fill="url(#bg-cle-usb-128)"/>
+  <rect width="800" height="600" rx="28" fill="url(#glow-cle-usb-128)"/>
+  <g stroke-linejoin="round" stroke-linecap="round">
+
+    <ellipse cx="400" cy="470" rx="170" ry="20" fill="#000" opacity="0.22"/>
+    <rect x="250" y="270" width="240" height="90" rx="18" fill="#1c2244"/>
+    <rect x="276" y="292" width="120" height="14" rx="7" fill="#38e1b0"/>
+    <rect x="490" y="296" width="60" height="38" rx="6" fill="#c7cee6"/>
+    <rect x="550" y="304" width="20" height="22" rx="3" fill="#9aa3c7"/>
+
+  </g>
+</svg>

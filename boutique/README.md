@@ -40,6 +40,17 @@ dossier sur **GitHub Pages** / tout hébergement statique.
 | `contact.html` / `contact.js` | Commande : récapitulatif + formulaire |
 | `data.js` | Catalogue produits + logique de panier partagée |
 | `style.css` | Styles communs à toutes les pages |
+| `images/*.svg` | Illustrations de produits (une par article) |
+| `build-images.js` | Script qui (re)génère les illustrations SVG |
+
+## Images des produits
+
+Chaque produit a une illustration vectorielle (SVG) dans `images/<id>.svg`,
+au style homogène et sans dépendance réseau. Pour les régénérer après une
+modification : `node build-images.js`.
+
+> Pour utiliser de **vraies photos** à la place, déposez vos fichiers dans
+> `images/` et adaptez le champ `image` du produit dans `data.js`.
 
 ## Personnaliser
 

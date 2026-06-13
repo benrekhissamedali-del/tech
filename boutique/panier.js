@@ -31,7 +31,7 @@ function rendrePanier() {
     <tr>
       <td>
         <div class="panier-prod">
-          <span class="ico">${l.produit.icone}</span>
+          <img class="ico" src="${l.produit.image}" alt="${l.produit.nom}">
           <div>
             <strong><a href="produit.html?id=${l.produit.id}">${l.produit.nom}</a></strong>
             <button class="lien-suppr" data-suppr="${l.produit.id}">Retirer</button>
