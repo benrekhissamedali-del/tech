@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechStore — Matériel informatique</title>
+  <meta name="description" content="Boutique en ligne de matériel informatique : ordinateurs, écrans, périphériques, stockage et réseau à prix malins.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-row">
+      <a href="index.html" class="logo">Tech<span class="dot">Store</span></a>
+      <div class="recherche">
+        <span aria-hidden="true">🔎</span>
+        <input id="recherche" type="search" placeholder="Rechercher un produit (clavier, SSD, écran…)" autocomplete="off">
+      </div>
+      <div class="header-actions">
+        <a href="panier.html" class="btn-panier">
+          🛒 Panier
+          <span class="badge" data-badge-panier hidden>0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Le meilleur du matériel informatique</h1>
+    <p>Ordinateurs, écrans, périphériques, stockage et réseau — livrés rapidement, garantis et au juste prix.</p>
+  </section>
+
+  <main class="conteneur">
+    <div id="filtres" class="filtres"><!-- chips de catégories injectées en JS --></div>
+
+    <div class="barre-tri">
+      <span class="compte" id="compte">—</span>
+      <label>
+        Trier :
+        <select id="tri">
+          <option value="pertinence">Pertinence</option>
+          <option value="prix-asc">Prix croissant</option>
+          <option value="prix-desc">Prix décroissant</option>
+          <option value="note">Mieux notés</option>
+        </select>
+      </label>
+    </div>
+
+    <div id="grille" class="grille"><!-- cartes injectées en JS --></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="conteneur">© 2026 TechStore — Boutique de démonstration. Aucun paiement réel n'est effectué.</div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="boutique.js"></script>
+</body>
+</html>
