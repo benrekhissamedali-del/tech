@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <defs>
+    <linearGradient id="bg-pc-bureau-gamer" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#272f5e"/>
+      <stop offset="1" stop-color="#171c38"/>
+    </linearGradient>
+    <radialGradient id="glow-pc-bureau-gamer" cx="0.5" cy="0.42" r="0.55">
+      <stop offset="0" stop-color="#38e1b0" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#38e1b0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="scr-pc-bureau-gamer" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5b8cff"/>
+      <stop offset="1" stop-color="#38e1b0"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" rx="28" fill="url(#bg-pc-bureau-gamer)"/>
+  <rect width="800" height="600" rx="28" fill="url(#glow-pc-bureau-gamer)"/>
+  <g stroke-linejoin="round" stroke-linecap="round">
+
+    <ellipse cx="400" cy="510" rx="150" ry="22" fill="#000" opacity="0.22"/>
+    <rect x="300" y="150" width="200" height="350" rx="18" fill="#1c2244"/>
+    <rect x="300" y="150" width="200" height="350" rx="18" fill="none" stroke="#5b8cff" stroke-width="3" opacity="0.5"/>
+    <rect x="326" y="184" width="148" height="150" rx="10" fill="#11152e"/>
+    <circle cx="370" cy="240" r="26" fill="none" stroke="#38e1b0" stroke-width="6"/>
+    <circle cx="430" cy="240" r="26" fill="none" stroke="#5b8cff" stroke-width="6"/>
+    <rect x="326" y="360" width="148" height="12" rx="6" fill="#ffc94d"/>
+    <rect x="326" y="386" width="148" height="12" rx="6" fill="#5b8cff"/>
+    <rect x="326" y="412" width="148" height="12" rx="6" fill="#38e1b0"/>
+    <circle cx="340" cy="466" r="7" fill="#38e1b0"/>
+    <circle cx="364" cy="466" r="7" fill="#ffc94d"/>
+
+  </g>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <defs>
+    <linearGradient id="bg-webcam-hd" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#272f5e"/>
+      <stop offset="1" stop-color="#171c38"/>
+    </linearGradient>
+    <radialGradient id="glow-webcam-hd" cx="0.5" cy="0.42" r="0.55">
+      <stop offset="0" stop-color="#5b8cff" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#5b8cff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="scr-webcam-hd" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5b8cff"/>
+      <stop offset="1" stop-color="#38e1b0"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" rx="28" fill="url(#bg-webcam-hd)"/>
+  <rect width="800" height="600" rx="28" fill="url(#glow-webcam-hd)"/>
+  <g stroke-linejoin="round" stroke-linecap="round">
+
+    <ellipse cx="400" cy="470" rx="150" ry="22" fill="#000" opacity="0.22"/>
+    <rect x="280" y="200" width="240" height="150" rx="40" fill="#1c2244"/>
+    <circle cx="400" cy="275" r="64" fill="#11152e"/>
+    <circle cx="400" cy="275" r="46" fill="url(#scr-webcam-hd)"/>
+    <circle cx="400" cy="275" r="22" fill="#11152e"/>
+    <circle cx="416" cy="262" r="9" fill="#fff" opacity="0.8"/>
+    <circle cx="486" cy="224" r="7" fill="#ff6b6b"/>
+    <path d="M300 350 h200 l40 70 h-280 z" fill="#9aa3c7"/>
+    <rect x="360" y="420" width="80" height="22" rx="6" fill="#c7cee6"/>
+
+  </g>
+</svg>

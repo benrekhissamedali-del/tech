@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produit — TechStore</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-row">
+      <a href="index.html" class="logo">Tech<span class="dot">Store</span></a>
+      <div class="recherche">
+        <span aria-hidden="true">🔎</span>
+        <input id="recherche" type="search" placeholder="Rechercher un produit…" autocomplete="off">
+      </div>
+      <div class="header-actions">
+        <a href="panier.html" class="btn-panier">
+          🛒 Panier
+          <span class="badge" data-badge-panier hidden>0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="conteneur" id="contenu">
+    <!-- Injecté en JS selon l'identifiant du produit -->
+  </main>
+
+  <footer class="site-footer">
+    <div class="conteneur">© 2026 TechStore — Boutique de démonstration.</div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="produit.js"></script>
+</body>
+</html>

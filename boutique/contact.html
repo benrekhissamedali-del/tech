@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commande & contact — TechStore</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-row">
+      <a href="index.html" class="logo">Tech<span class="dot">Store</span></a>
+      <div class="recherche">
+        <span aria-hidden="true">🔎</span>
+        <input id="recherche" type="search" placeholder="Rechercher un produit…" autocomplete="off">
+      </div>
+      <div class="header-actions">
+        <a href="panier.html" class="btn-panier">
+          🛒 Panier
+          <span class="badge" data-badge-panier hidden>0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="conteneur">
+    <h1 class="section-titre">Finaliser ma commande</h1>
+    <p style="color:var(--muted);margin-top:0">
+      Remplissez vos coordonnées : nous vous recontactons pour confirmer la commande et le paiement.
+    </p>
+
+    <div id="recap-commande"><!-- récapitulatif injecté en JS --></div>
+
+    <form id="form-commande" class="form-grid" novalidate>
+      <div class="champ-double">
+        <div class="champ">
+          <label for="prenom">Prénom *</label>
+          <input id="prenom" name="prenom" required>
+        </div>
+        <div class="champ">
+          <label for="nom">Nom *</label>
+          <input id="nom" name="nom" required>
+        </div>
+      </div>
+      <div class="champ-double">
+        <div class="champ">
+          <label for="email">E-mail *</label>
+          <input id="email" name="email" type="email" required>
+        </div>
+        <div class="champ">
+          <label for="tel">Téléphone</label>
+          <input id="tel" name="tel" type="tel">
+        </div>
+      </div>
+      <div class="champ">
+        <label for="adresse">Adresse de livraison *</label>
+        <input id="adresse" name="adresse" required>
+      </div>
+      <div class="champ-double">
+        <div class="champ">
+          <label for="cp">Code postal *</label>
+          <input id="cp" name="cp" required>
+        </div>
+        <div class="champ">
+          <label for="ville">Ville *</label>
+          <input id="ville" name="ville" required>
+        </div>
+      </div>
+      <div class="champ">
+        <label for="message">Remarque (optionnel)</label>
+        <textarea id="message" name="message" rows="3" placeholder="Instructions de livraison, question…"></textarea>
+      </div>
+      <button type="submit" class="btn btn-accent btn-block">Valider ma commande</button>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <div class="conteneur">© 2026 TechStore — Boutique de démonstration. Aucun paiement réel n'est effectué.</div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="contact.js"></script>
+</body>
+</html>
