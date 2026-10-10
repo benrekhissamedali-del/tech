@@ -139,7 +139,15 @@ const camera = {
   hasSensor: false,
   targetYaw: 0,
   targetPitch: 0,
+  basis: { cosYaw: 1, sinYaw: 0, cosPitch: 1, sinPitch: 0 },
 };
+
+function updateCameraBasis() {
+  camera.basis.cosYaw = Math.cos(-camera.yaw);
+  camera.basis.sinYaw = Math.sin(-camera.yaw);
+  camera.basis.cosPitch = Math.cos(-camera.pitch);
+  camera.basis.sinPitch = Math.sin(-camera.pitch);
+}
 
 function onOrientation(e) {
   let heading = null;
@@ -215,12 +223,11 @@ function buildDome() {
 
 function project(p, w, h) {
   // Rotation monde -> caméra (lacet puis tangage), puis perspective.
-  const cy = Math.cos(-camera.yaw), sy = Math.sin(-camera.yaw);
-  const x1 = p.x * cy + p.z * sy;
-  const z1 = -p.x * sy + p.z * cy;
-  const cp = Math.cos(-camera.pitch), sp = Math.sin(-camera.pitch);
-  const y2 = p.y * cp - z1 * sp;
-  const z2 = p.y * sp + z1 * cp;
+  const { cosYaw, sinYaw, cosPitch, sinPitch } = camera.basis;
+  const x1 = p.x * cosYaw + p.z * sinYaw;
+  const z1 = -p.x * sinYaw + p.z * cosYaw;
+  const y2 = p.y * cosPitch - z1 * sinPitch;
+  const z2 = p.y * sinPitch + z1 * cosPitch;
   if (z2 <= 0.1) return null;
   const f = (h / 2) / Math.tan(camera.fov / 2);
   return { x: w / 2 + (x1 / z2) * f, y: h / 2 - (y2 / z2) * f, depth: z2 };
@@ -232,6 +239,9 @@ function spawnPulse(rand) {
 }
 
 function drawScene(ctx, w, h, dt, time) {
+  // Skip heavy redraws while the tab is hidden; the scene will resume on the next frame.
+  if (document.visibilityState === "hidden") return;
+
   ctx.fillStyle = "#10106b";
   ctx.fillRect(0, 0, w, h);
 
@@ -240,6 +250,7 @@ function drawScene(ctx, w, h, dt, time) {
   dyaw = ((dyaw + Math.PI) % TAU + TAU) % TAU - Math.PI;
   camera.yaw += dyaw * Math.min(1, dt * 8);
   camera.pitch += (camera.targetPitch - camera.pitch) * Math.min(1, dt * 8);
+  updateCameraBasis();
 
   // Dôme de points.
   ctx.fillStyle = "rgba(255,255,255,0.45)";
